@@ -1,0 +1,103 @@
+# My Fire TV Stick (older, Android-based Fire OS 6/7/8; exact model to be read with tools/tv.py --probe).
+# Based on examples/amazon-fire-tv-stick-4k-2018 (tested on Fire OS 6.7.1.1), with the Fire OS 7 names from the
+# Toshiba and Insignia lists added so it also fits a newer stick. A package your stick doesn't have, or that Fire OS
+# protects, just prints an error and is skipped; everything else still applies.
+#
+# Apply:   TV_HOST=<stick ip> tools/disable.sh my-fire-tv/debloat.txt
+# Undo:    TV_HOST=<stick ip> tools/restore.sh my-fire-tv/debloat.txt com.amazon.tv.launcher
+# Everything is DISABLED for user 0, never uninstalled. Comment out any line you want to keep.
+#
+# FIRE OS: DEBLOAT ONLY. Amazon's home screen is protected, so launcher/ does not apply and the "Sponsored" banner
+# stays (see README.md in this folder for the optional ad-blocking DNS that empties it).
+#
+# Kept on purpose (not listed): Netflix, Prime Video, Disney+, YouTube, Max; Alexa voice search on the remote mic
+# (com.amazon.vizzini, com.amazon.aria, com.amazon.cardinal); firmware updates (OTA); Appstore; settings; keyboard;
+# remote and Bluetooth; the Fire TV phone-remote link (whisperlink / whisperplay); screensaver; profiles.
+# Switched off by choice: screen mirroring and casting from phone apps, Alexa extras, unused streaming apps.
+
+# Amazon telemetry, metrics, logs, crash and usage reporting
+com.amazon.client.metrics                 # protected on Fire OS 6 (error is expected there)
+com.amazon.client.metrics.api
+# com.amazon.device.metrics               # protected by Fire OS 6 and 7
+com.amazon.metrics.api
+# com.amazon.minerva.client.api           # protected by Fire OS 6
+com.amazon.neo.minerva                    # Fire OS 7 metrics
+com.amazon.neo.minerva.logcat
+com.amazon.tv.fw.metrics
+com.amazon.wirelessmetrics.service
+com.amazon.perfcollection
+com.amazon.perfc
+com.amazon.device.logmanager              # protected on Fire OS 6
+com.amazon.device.crashmanager            # protected on Fire OS 6
+com.amazon.dp.logger
+# com.amazon.diode                        # diagnostics uploader (protected by Fire OS 6)
+com.amazon.ceviche                        # data collection pipelines
+com.amazon.tv.developer.dataservice       # content personalization data for third-party apps
+com.fireos.usagestats.proxy               # reports app usage to Amazon (protected on Fire OS 6)
+com.amazon.wifilocker                     # uploads Wi-Fi passwords to Amazon
+
+# Ads, sponsored rows, recommendations, promos
+com.amazon.kso.blackbird                  # launcher ad sync / bidding (sponsored banner and rows)
+com.amazon.sneakpeek                      # sponsored "Sneak Peek" previews
+# com.amazon.ftvads.deeplinking           # ad deep links (protected by Fire OS)
+com.amazon.hybridadidservice              # advertising ID service
+com.amazon.hedwig                         # Fire TV Channels (free ad-supported channels row)
+com.amazon.tv.easyupgrade                 # "upgrade your Fire TV" promos
+com.amazon.device.sale.service            # sale / deal campaign service
+com.amazon.shoptv.client                  # Amazon Shopping on TV
+com.amazon.shoptv.firetv.client
+com.amazon.tv.livetv                      # Live tab and guide
+com.amazon.franktvinput                   # live TV input feeding the Live tab
+com.amazon.livedeviceservice
+com.amazon.gamehub                        # games hub / Luna cards
+com.amazon.imdb.tv.android.app            # Freevee stub
+com.amazon.minitv.android.app             # miniTV stub
+com.amazon.privacypassservice             # privacy pass token service
+com.amazon.providers.contentsupport       # content support provider
+com.amazon.systemnotices                  # system notices
+com.amazon.tv.releasenotes                # "what's new" release notes
+com.amazon.uxnotification                 # UX notification popups
+
+# Preloaded Amazon apps and services not used
+com.amazon.tahoe                          # Amazon Kids (FreeTime)
+com.amazon.bueller.music                  # Amazon Music
+com.amazon.bueller.photos                 # Amazon Photos
+com.amazon.cloud9                         # Silk browser
+com.amazon.tv.website_launcher            # opens websites in Silk
+com.imdb.livingroom.firetv                # IMDb app
+com.amazon.tmm.tutorial                   # remote tutorial
+com.amazon.storm.lightning.tutorial       # remote app tutorial
+com.amazon.whad                           # whole-home audio (multi-room music)
+com.amazon.whasettings
+com.amazon.wha.mediabrowserservice
+com.amazon.whisperjoin.middleware.np      # frustration-free setup of other Amazon devices
+com.amazon.whisperjoin.wss.wifiprovisioner
+com.amazon.tv.ffsprovisioneeclient
+com.amazon.ods.kindleconnect              # "show on Fire TV" from Echo / Fire tablet
+
+# Alexa extras (voice search on the remote mic stays on)
+com.amazon.tv.alexaalerts                 # alarms, timers, reminders
+com.amazon.tv.alexanotifications
+com.amazon.alexa.externalmediaplayer.fireos   # Alexa music playback
+com.amazon.alexamediaplayer.runtime.ftv
+com.amazon.aiondec                        # Alexa skill connections
+
+# Screen mirroring and casting from phone apps (off by choice; comment these out to cast from your phone)
+com.amazon.cast.sink                      # screen mirroring (Miracast / Fire Cast)
+com.amazon.dialservice                    # cast button in Netflix / YouTube phone apps (DIAL)
+com.amazon.awvflingreceiver               # Amazon "fling" cast receiver
+
+# Streaming apps not used (kept: Netflix, Prime Video, Disney+, YouTube, Max)
+com.adultswim.firetv
+com.cbs.ott                               # Paramount+
+com.espn.gtv
+com.fox.fts.android                       # FOX
+com.foxsports.videogo
+com.fubo.firetv.screen
+com.hulu.plus
+com.nbcuni.telemundostation.houston.firetv
+com.amazon.webapps.nbc.telemundo
+com.peacock.peacockfiretv
+com.tubitv.ott
+com.univision.android
+tv.pluto.android
